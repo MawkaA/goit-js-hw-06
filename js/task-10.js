@@ -8,28 +8,31 @@ const btnCreate = document.querySelector('button[data-create]');
 const btnDestroy = document.querySelector('button[data-destroy]');
 let boxes = document.getElementById('boxes');
 
-btnCreate.addEventListener('click', createBoxes);
+btnCreate.addEventListener('click', getBoxes);
 btnDestroy.addEventListener('click', destroyBoxes);
-function createBoxes(amount) {
-  amount = +inputEl.value;
-  let fragment = document.createDocumentFragment()
-  fragment.forEach(function (element) {
+
+
+function getBoxes() {
+  parseInt(+inputEl.value);
+  assign();
+}
+
+function assign() {
+  const basicSize = 30;
+  let fragment = document.createDocumentFragment();
+  for (let i = 0; i <  parseInt(+inputEl.value); i++) {
+    let size = basicSize + i * 10;
     let div = document.createElement('div');
-    let basicSize = 30;
-    let size = basicSize + element * 10;
-    let textInp = `width: ${size}px; height: ${size}px; background-color: rgba( ${getRandomHexColor()})`;
-    div.textContent = textInp;
-});
-  return fragment.append(...div);
-  // for (let i = 0; i <= amount; i++) {
-  //   let basicSize = 30;
-  //   let size = basicSize + i * 10;
-  //   let div = document.createElement('div');
-  //   div.style.cssText = `width: ${size}px; height: ${size}px; background-color: rgba( ${getRandomHexColor()})`;
-  // };
-  // return fragment;
-  return boxes.append(fragment);
+    div.insertAdjacentHTML("afterbegin", `width: ${size}px; height: ${size}px; background-color:${getRandomHexColor()}`);
+    fragment.append(div);
+  }
+  boxes.append(fragment);
 };
+
 function destroyBoxes() {
   boxes.innerHTML = '';
-}
+};
+
+
+
+//не получается пофиксить. что не так ?
